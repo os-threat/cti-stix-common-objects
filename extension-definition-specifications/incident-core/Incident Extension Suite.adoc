@@ -36,15 +36,16 @@
 :intrusion_set_url: https://docs.oasis-open.org/cti/stix/v2.1/os/stix-v2.1-os.html#_5ol9xlbbnrdn
 :location_url: https://docs.oasis-open.org/cti/stix/v2.1/os/stix-v2.1-os.html#_th8nitr8jb4k
 :malware_url: https://docs.oasis-open.org/cti/stix/v2.1/os/stix-v2.1-os.html#_s5l7katgbp09
+:observation_url: https://docs.oasis-open.org/cti/stix/v2.1/os/stix-v2.1-os.html#_p49j1fwoxldc
 :sighting_url: https://docs.oasis-open.org/cti/stix/v2.1/os/stix-v2.1-os.html#_a795guqsap3r
 :threat_actor_url: https://docs.oasis-open.org/cti/stix/v2.1/os/stix-v2.1-os.html#_k017w16zutw
 :tool_url: https://docs.oasis-open.org/cti/stix/v2.1/os/stix-v2.1-os.html#_z4voa9ndw8v
 
-= [stixtitle]*Incident Core Extension Version 2.0 for STIX^TM^ Version 2.1*
+= [stixtitle]*Incident Core Extension Version 3.0 for STIX^TM^ Version 2.1*
 
 [.stix-doc-information-heading]#Draft#
 
-[.stix-doc-information-heading]#10 July 2023#
+[.stix-doc-information-heading]#01 November 2023#
 
 [.stix-doc-information-heading]
 Editors:
@@ -76,17 +77,22 @@ toc::[]
 The current STIX 2.1 Incident object exists as a stub in the hopes that future work would allow STIX Incidents to be more fully fleshed out using extensions, and that in time a set of core features could be defined to be migrated into a future version of the Incident object or the community could arrive at the consensus to continue to use these extensions.
 
 In the 1.0 version of the core incident extension information on impact, events, and tasks were embedded within the Incident itself, however this was found to have limitations.
-As such a 2.0 version of this extension has been created in order to separate these components into independent SDOs to more complex incidents to be accurately modeled.
+In the 2.0 version of the core incident extension information on impact, events, and tasks were separated into independent SDO's, however this approach did not meet TC requirements and did not collect provenance of observations to enable judgement on evidence.
 
-These extensions allow tracking incidents across their life cycle where Events are first flagged for investigation resulting in [stixtype]#{incident_url}[incidents]# with [stixtype]#<<task,tasks>># being worked to resolve these.
+As such a 3.0 version of this extension has been created in order to improve the sequencing model, to more closely approximate CACO, and to introduce a better method collecting provenance of observations to enable better decision processes, and more complex incidents to be accurately modeled.
+
+These extensions allow tracking [stixtype]#{incident_url}[incidents]# across their life cycle, and enable better evidentiary judgment processes where each type of  [stixtype]#{sighting_url}[sighting]#, has [stixtype]#<<evidence,evidence>># extensions to capture the provenance, and enable evidentiary value to be assessed. This enables semi-automated judgements and forensic evaluation of decision veracity.
+
+Many sighting types create [stixtype]#<<event,events>>#, which  are flagged for investigation resulting in [stixtype]#{incident_url}[incidents]# with [stixtype]#<<task,tasks>># being worked to resolve these. [stixtype]#<<event, Events>># and [stixtype]#<<task,tasks>>#, can be organised into serial and parallel workflows using  [stixtype]#<<sequence,sequence>># objects, or they can be considered as atomic and discrete if [stixtype]#<<sequence,sequences>># are not present.
+
 Incidents have [stixtype]#<<impact,impacts>># that change over time.
 [stixtype]#<<event,Events>># can cause or influence these [stixtype]#<<impact,impacts>># which are in turn mitigated and potentially resolved by [stixtype]#<<task,tasks>># performed as part of the incident response process.
-Both [stixtype]#<<event,events>># and [stixtype]#<<task,tasks>># can exist independent of [stixtype]#{incident_url}[incidents]# and in most workflows will occur prior to an incident being declared.
+Both [stixtype]#<<event,events>># and [stixtype]#<<task,tasks>># can exist independent of [stixtype]#{incident_url}[incidents]# and in some workflows may occur prior to an incident being declared.
 
 
 == 1. Incidents in STIX
 
-Incident objects represent cases composed of [stixtype]#<<event,events>># and [stixtype]#<<task,tasks>># as well as actual or potential [stixtype]#<<impact,impacts>>#.
+Incident objects represent cases composed of [stixtype]#<<event,events>># and [stixtype]#<<task,tasks>># as well as actual or potential [stixtype]#<<impact,impacts>>#. [stixtype]#<<event,Events>># and [stixtype]#<<task,tasks>># can be sequenced by [stixtype]#<<sequence,sequence>># objects, which
 An Incident SDO can be created prior to a formal determination that the incident has an impact as a way to logically track case work in an attempt to investigate events or lower level alerts.
 
 The Incident object should have sufficient properties to represent the current state of the incident or investigation while serving as an anchor point to record both related activities and the impact to an organization.
@@ -131,14 +137,10 @@ The values of this property *MUST* come from the [stixtype]#<<incident-investiga
 |The criticality of the incident.
 This value *MUST* be between 0 to 100. This can be translated into qualitative values as described in <<appendix-b,Appendix B>>.
 
-|*detection_methods* (optional)
-|[stixtype]#{list_url}[list]# of type [stixtype]#{open_vocab_url}[open-vocab]#
-|A list of strings containing what was used to detect the activity, e.g., commercial tool names, techniques associated with proprietary solutions, human review, external sources, or other methods.
-This should draw from the [stixtype]#<<detection-methods-ov,detection-methods-ov>>#.
-
-|*events* (optional)
-|[stixtype]#{list_url}[list]# of type [stixtype]#<<event-entry,event-entry>>#
+|*event_refs* (optional)
+|[stixtype]#{list_url}[list]# of type [stixtype]#{identifier_url}[identifier]
 |A list of events tied to this incident.
+It *MUST* contain references to one or more Event objects.
 
 |*impact_refs* (optional)
 |[stixtype]#{list_url}[list]# of type [stixtype]#{identifier_url}[identifier]#
@@ -160,6 +162,11 @@ If this field is not present it should be assumed that this information is not b
 
 This is an open vocabulary and values *SHOULD* come from the [stixtype]#<<event-type-ov,event-type-ov>>#.
 
+|*other_object_refs* (required)
+|[stixtype]#{list_url}[list]# of type [stixtype]#{identifier_url}[identifier]#
+|A list of all SDO, SCO and SRO objects contained in this incident, not including Task, Event, Impact or Sequence objects.
+It *MUST* contain references to one or more SDO, SCO or SRO objects.
+
 |*recoverability* (optional)
 |[stixtype]#<<recoverability-enum,recoverability-enum>>#
 |The recoverability of this particular Incident with respect to feasibility and required time and resources.
@@ -171,9 +178,10 @@ enumeration.
 |[stixtype]#{list_url}[list]# of type [stixtype]#<<incident-score,incident-score>>#
 |A list of scores from various automated or manual mechanisms along with optional descriptions.
 
-|*tasks* (optional)
-|[stixtype]#{list_url}[list]# of type [stixtype]#<<task-entry,task-entry>>#
+|*task_refs* (optional)
+|[stixtype]#{list_url}[list]# of type [stixtype]#{identifier_url}[identifier]#
 |A list of tasks tied to this incident.
+It *MUST* contain references to one or more Task objects.
 
 |===
 
@@ -283,8 +291,7 @@ This can be used to supplement the created_by_ref in cases where external author
 *status*,
 *sighting_refs*,
 *start_time*,
-*start_time_fidelity*,
-*subevents*
+*start_time_fidelity*
 |===
 
 |===
@@ -355,9 +362,7 @@ This property *SHOULD* be populated.
 If no value is provided the timestamp should be considered to be
 accurate up to the number of decimals it includes.
 
-|*subevents* (optional)
-|[stixtype]#{list_url}[list]# of type [stixtype]#<<event-entry,event-entry>>#
-|A list of sub-events tied to this event.
+
 |===
 
 <<<
@@ -809,7 +814,6 @@ The values of this property *MUST* come from the [stixtype]#<<traceability-enum,
 *priority*,
 *start_time*,
 *start_time_fidelity*,
-*subtasks*,
 *template_refs*
 |===
 
@@ -884,9 +888,6 @@ This property *SHOULD* be populated.
 If no value is provided the timestamp should be considered to be
 accurate up to the number of decimals it includes.
 
-|*subtasks* (optional)
-|[stixtype]#{list_url}[list]# of type [stixtype]#<<task-entry,task-entry>>#
-|A list of subtasks tied to this task.
 |===
 
 <<<
@@ -913,12 +914,12 @@ Using these embedded relationships ensure that an incomplete sequence cannot be 
 |[stixtype]#{course_of_action_url}[course-of-action]#
 |An task uses a particular course of action.
 
-|[stixtype]#<<task,task>># 
+|[stixtype]#<<task,task>>#
 |[stixrelationship]#blocks#
 |[stixtype]#<<event,event>>#
 |A task was performed to block a potential event.
 
-|[stixtype]#<<task,task>># 
+|[stixtype]#<<task,task>>#
 |[stixrelationship]#causes#
 |[stixtype]#<<event,event>>#
 |A task was performed that caused an event, usually due to an error.
@@ -992,6 +993,83 @@ Using these embedded relationships ensure that an incomplete sequence cannot be 
 |===
 
 // end::task-relationships[]
+
+
+<<<
+[[sequence]]
+=== 2.5. Sequence
+
+[width="100%",cols="100%",stripes=odd]
+|===
+^|[stixtr]*Required Common Properties*
+|*created*,
+*id*,
+*modified*,
+*spec_version*,
+*type*
+
+^|[stixtr]*Optional Common Properties*
+
+|*created_by_ref*,
+*revoked*,
+*labels*,
+*confidence*,
+*lang*,
+*external_references*,
+*object_marking_refs*,
+*granular_markings*,
+*extensions*
+
+^|[stixtr]*Not Applicable Common Properties*
+
+|*defanged*
+
+^|[stixtr]*Sequence Object Specific Properties*
+
+|*sequenced_object*,
+*step_type*,
+*on_completion*,
+*on_success*,
+*on_failure*,
+*next_steps*
+|===
+
+|===
+^|[stixtr]*Property Name* ^|[stixtr]*Type* ^|[stixtr]*Description*
+
+|*type* (required)
+|[stixtype]#{string_url}[string]#
+|The value of this property *MUST* be set to [stixliteral]#sequence#.
+
+|*step_type* (required)
+|[stixtype]#<<step-type-enum,step-type-enum>>#
+|The type of step,  *MUST* be one of (start_step, end_step, single_step, parallel_step)
+
+|*sequenced_object* (optional)
+|[stixtype]#{identifier_url}[identifier]#
+|The SDO that is part of the sequence, *MUST* be of type [stixtype]#event# or [stixtype]#task#.
+
+|*on_completion* (optional)
+|[stixtype]#{identifier_url}[identifier]#
+|The [stixtype]#sequence# object to follow, *MUST* be of type [stixtype]#sequence#
+
+
+|*on_success* (optional)
+|[stixtype]#{identifier_url}[identifier]#
+|The [stixtype]#sequence# object to follow, *MUST* be of type [stixtype]#sequence#
+
+
+|*on_failure* (optional)
+|[stixtype]#{identifier_url}[identifier]#
+|The [stixtype]#sequence# object to follow, *MUST* be of type [stixtype]#sequence#
+
+
+|*next_steps* (optional)
+|[stixtype]#{list_url}[list]# of type [stixtype]#{identifier_url}[identifier]#
+|The [stixtype]#sequence# objects to follow, *MUST* be of type [stixtype]#sequence#
+
+
+|===
 
 <<<
 
