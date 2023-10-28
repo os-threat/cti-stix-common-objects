@@ -138,7 +138,7 @@ The values of this property *MUST* come from the [stixtype]#<<incident-investiga
 This value *MUST* be between 0 to 100. This can be translated into qualitative values as described in <<appendix-b,Appendix B>>.
 
 |*event_refs* (optional)
-|[stixtype]#{list_url}[list]# of type [stixtype]#{identifier_url}[identifier]
+|[stixtype]#{list_url}[list]# of type [stixtype]#{identifier_url}[identifier]#
 |A list of events tied to this incident.
 It *MUST* contain references to one or more Event objects.
 
