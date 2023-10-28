@@ -178,6 +178,16 @@ enumeration.
 |[stixtype]#{list_url}[list]# of type [stixtype]#<<incident-score,incident-score>>#
 |A list of scores from various automated or manual mechanisms along with optional descriptions.
 
+|*sequence_refs* (optional)
+|[stixtype]#{list_url}[list]# of type [stixtype]#{identifier_url}[identifier]#
+|A list of Sequence Start objects tied to this incident.
+It *MUST* contain references only to Sequence objects.
+
+|*sequence_start_refs* (optional)
+|[stixtype]#{list_url}[list]# of type [stixtype]#{identifier_url}[identifier]#
+|A list of ence objects tied to this incident.
+It *MUST* contain references only to Sequence objects, where the step_type property is set to [stixliteral]#start_step#.
+
 |*task_refs* (optional)
 |[stixtype]#{list_url}[list]# of type [stixtype]#{identifier_url}[identifier]#
 |A list of tasks tied to this incident.
@@ -1027,6 +1037,7 @@ Using these embedded relationships ensure that an incomplete sequence cannot be 
 ^|[stixtr]*Sequence Object Specific Properties*
 
 |*sequenced_object*,
+*sequence_type*,
 *step_type*,
 *on_completion*,
 *on_success*,
@@ -1043,7 +1054,11 @@ Using these embedded relationships ensure that an incomplete sequence cannot be 
 
 |*step_type* (required)
 |[stixtype]#<<step-type-enum,step-type-enum>>#
-|The type of step,  *MUST* be one of (start_step, end_step, single_step, parallel_step)
+|The type of step,  *MUST* be one of [stixliteral]#(start_step, end_step, single_step, parallel_step)#
+
+|*sequence_type* (required)
+|[stixtype]#{string_url}[string]#
+|The type of sequence,  *MUST* be [stixliteral]#(event or task)#
 
 |*sequenced_object* (optional)
 |[stixtype]#{identifier_url}[identifier]#
