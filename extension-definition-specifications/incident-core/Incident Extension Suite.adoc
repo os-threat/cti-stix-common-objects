@@ -102,6 +102,7 @@ The Incident object should have sufficient properties to represent the current s
 === 2.1. Incident Core
 
 The properties and additional types within the Incident Core Extension are defined below. As this is not a top-level object, fields such as identifier are not present.  This extension *MUST* use [stixliteral]#extension-definition--ef765651-680c-498d-9894-99799f2fa126# as its extension ID.
+The Python class name is [stixliteral]#IncidentCoreExt#.
 
 <<<
 
@@ -263,6 +264,7 @@ This can be used to supplement the created_by_ref in cases where external author
 <<<
 [[event]]
 === 2.2. Event
+The Python class name is [stixliteral]#Event#.
 
 [width="100%",cols="100%",stripes=odd]
 |===
@@ -418,6 +420,23 @@ If this can be shared a Sighting it should be instead of using this method.
 
 <<<
 
+==== 2.2.2 Event Extension Definition
+The definition extension  *MUST* use [stixliteral]#extension-definition--4ca6de00-5b0d-45ef-a1dc-ea7279ea910e# as its extension ID.
+The Python class name is [stixliteral]#EventCoreExt#.
+
+[width="100%",cols="37%,23%,40%",options="header",]
+|===
+^|[stixtr]*Property Name*
+^|[stixtr]*Type*
+^|[stixtr]*Description*
+
+|*extension_type* (required)
+|[stixtype]#{string_url}[string]#
+|The value of this property *MUST* be [stixliteral]#property-extension#
+
+|===
+<<<
+
 [width="100%",cols="23%,20%,24%,33%",options="header",]
 |===
 4+^|[stixtr]*Reverse Relationships*
@@ -446,6 +465,7 @@ If this can be shared a Sighting it should be instead of using this method.
 <<<
 [[impact]]
 === 2.3. Impact
+The Python class name is [stixliteral]#Impact#.
 
 [width="100%",cols="100%",stripes=odd]
 |===
@@ -573,9 +593,28 @@ The Impact SDO is currently an extension, but as there are many specific types o
 As such every Impact *MUST* have an extension that has the same value of the *impact_category*.
 This allows consumers to quickly validate their ability to process this category of impact and then load all of its specific details.
 
-Producers *SHOULD* use one of these extensions.
+Producers *SHOULD* use both the Extension Definition and one of these extensions.
 
-===== 2.3.2.1. Availability Impact Extension 
+
+===== 2.3.2.1 Impact Extension Definition
+The Python class name is [stixliteral]#ImpactCoreExt#.
+
+The definition extension  *MUST* use [stixliteral]#extension-definition--7cc33dd6-f6a1-489b-98ea-522d351d71b9# as its extension ID.
+
+[width="100%",cols="37%,23%,40%",options="header",]
+|===
+^|[stixtr]*Property Name*
+^|[stixtr]*Type*
+^|[stixtr]*Description*
+
+|*extension_type* (required)
+|[stixtype]#{string_url}[string]#
+|The value of this property *MUST* be [stixliteral]#property-extension#
+
+|===
+
+===== 2.3.2.2. Availability Impact Extension
+The Python class name is [stixliteral]#Availability#.
 
 [width="100%",cols="37%,23%,40%",options="header",]
 |===
@@ -594,7 +633,8 @@ This value *MUST* be between 0 to 100. This can be translated into qualitative v
 
 <<<
 
-===== 2.3.2.2. Confidentiality Impact Extension
+===== 2.3.2.3. Confidentiality Impact Extension
+The Python class name is [stixliteral]#Confidentiality#.
 
 [width="100%",cols="37%,23%,40%",options="header",]
 |===
@@ -623,7 +663,8 @@ This value *MUST* be included if the loss_type is not none. Including an entry w
 |The amount of data that was compromised in bytes. The value of this property *MUST NOT* be negative.
 |===
 
-===== 2.3.2.3. External Impact Extension
+===== 2.3.2.4. External Impact Extension
+The Python class name is [stixliteral]#External#.
 
 [width="100%",cols="37%,23%,40%",options="header",]
 |===
@@ -638,7 +679,8 @@ This value *MUST* be included if the loss_type is not none. Including an entry w
 
 <<<
 
-===== 2.3.2.4. Integrity Impact Extension
+===== 2.3.2.5. Integrity Impact Extension
+The Python class name is [stixliteral]#Integrity#.
 
 *Type Name:* [stixtype]#integrity-impact#
 
@@ -676,7 +718,8 @@ Including an entry that with an alteration of none and no information_type indic
 
 <<<
 
-===== 2.3.2.5. Monetary Impact Extension
+===== 2.3.2.6. Monetary Impact Extension
+The Python class name is [stixliteral]#Monetary#.
 
 [width="100%",cols="37%,23%,40%",options="header",]
 |===
@@ -739,7 +782,8 @@ This value *MUST* be included if the *max_amount* is included.
 
 <<<
 
-===== 2.3.2.6. Physical Impact Extension
+===== 2.3.2.7. Physical Impact Extension
+The Python class name is [stixliteral]#Physical#.
 
 [width="100%",cols="37%,23%,40%",options="header",]
 |===
@@ -766,6 +810,7 @@ Including an entry with an *impact_type* of none and no asset_type indicates tha
 |===
 
 ===== 2.3.2.7. Traceability Impact Extension
+The Python class name is [stixliteral]#Traceability#.
 
 [width="100%",cols="37%,23%,40%",options="header",]
 |===
@@ -784,6 +829,7 @@ The values of this property *MUST* come from the [stixtype]#<<traceability-enum,
 <<<
 [[task]]
 === 2.4. Task
+The Python class name is [stixliteral]#Task#.
 
 [width="100%",cols="100%",stripes=odd]
 |===
@@ -1005,9 +1051,26 @@ Using these embedded relationships ensure that an incomplete sequence cannot be 
 // end::task-relationships[]
 
 
+==== 2.4.2 Task Extension Definition
+The definition extension  *MUST* use [stixliteral]#extension-definition--2074a052-8be4-4932-849e-f5e7798e0030# as its extension ID.
+The Python class name is [stixliteral]#TaskCoreExt#.
+
+[width="100%",cols="37%,23%,40%",options="header",]
+|===
+^|[stixtr]*Property Name*
+^|[stixtr]*Type*
+^|[stixtr]*Description*
+
+|*extension_type* (required)
+|[stixtype]#{string_url}[string]#
+|The value of this property *MUST* be [stixliteral]#property-extension#
+
+|===
+
 <<<
 [[sequence]]
 === 2.5. Sequence
+The Python class name is [stixliteral]#Sequence#.
 
 [width="100%",cols="100%",stripes=odd]
 |===
@@ -1083,6 +1146,346 @@ Using these embedded relationships ensure that an incomplete sequence cannot be 
 |[stixtype]#{list_url}[list]# of type [stixtype]#{identifier_url}[identifier]#
 |The [stixtype]#sequence# objects to follow, *MUST* be of type [stixtype]#sequence#
 
+
+|===
+
+
+
+==== 2.5.1 Sequence Extension Definition
+The definition extension  *MUST* use [stixliteral]#extension-definition--be0c7c79-1961-43db-afde-637066a87a64# as its extension ID.  The Python class name is [stixliteral]#SequenceExt#.
+
+[width="100%",cols="37%,23%,40%",options="header",]
+|===
+^|[stixtr]*Property Name*
+^|[stixtr]*Type*
+^|[stixtr]*Description*
+
+|*extension_type* (required)
+|[stixtype]#{string_url}[string]#
+|The value of this property *MUST* be [stixliteral]#property-extension#
+
+|===
+
+<<<
+
+[[evidence]]
+=== 2.6. Sighting Extensions for Evidence
+The [stixtype]#{sighting_url}[Sighting]# object is used for connecting [stixtype]#{observation_url}[Observed Data]# objects to SDO's, such as Indicators, Malware and Threat Actors.
+
+Observations and Sightings have different evidentiary weightings based on their type (what they are) and provenance (how they were derived).
+Weightings cannot be established as provenance data is not collected for each observation, and confidence cannot be established.
+At present, Observations and Sightings cannot be added together as evidence, as they are different in nature.
+
+
+==== 2.6.1 Evidence Extensions
+
+There are at least 8 distinguishable sources of Sightings, each with their own data format for recording their provenance. These are defined as extensions, as listed below.
+
+Producers *SHOULD* use the definition extension and one of the 8 evidence extensions, to attach provenance to a [stixtype]#{sighting_url}[Sighting]# object.
+
+
+===== 2.6.1.1 Evidence Extension Definition
+The definition extension  *MUST* use [stixliteral]#extension-definition--0d76d6d9-16ca-43fd-bd41-4f800ba8fc43# as its extension ID. The Python class name is [stixliteral]#SightingEvidence#.
+
+[width="100%",cols="37%,23%,40%",options="header",]
+|===
+^|[stixtr]*Property Name*
+^|[stixtr]*Type*
+^|[stixtr]*Description*
+
+|*extension_type* (required)
+|[stixtype]#{string_url}[string]#
+|The value of this property *MUST* be [stixliteral]#property-extension#
+
+|===
+
+<<<
+
+===== 2.6.1.2. Alert Evidence Extension
+An Alert can be issued by a system or a user. Generally, when an Alert is issued, it is not known whether it is actually nefarious.
+As an example:
+
+- A suspicious email is reported by a user, and the associated SCO’s and SRO’s are collected in an Observed-Data object
+- A Sighting is established where the Indicator has a type of “unknown”, and connected to an Event
+
+Alerts are often used to initiailise an incident. Conceivably, once an Alert is qualified as a true positive, it could be joined to another Alert from another Incident. The Python class name is [stixliteral]#SightingAlert#.
+
+[width="100%",cols="37%,23%,40%",options="header",]
+|===
+^|[stixtr]*Property Name*
+^|[stixtr]*Type*
+^|[stixtr]*Description*
+
+|*name* (required)
+|[stixtype]#{string_url}[string]#
+|The name of the Alert as it appears in the alerting system, or  based on the user report
+
+|*log* (optional)
+|[stixtype]#{string_url}[string]#
+|The content of the Alert as it appears in the alerting system, or  based on the user report
+
+|*system_id* (optional)
+|[stixtype]#{string_url}[string]#
+|The unique identifier in the origin system
+
+|*source* (optional)
+|[stixtype]#{string_url}[string]#
+|The origin of the alarm for example McAfee SIEM v12.0
+
+|*product* (optional)
+|[stixtype]#{string_url}[string]#
+|The product that detected as open vocab for example AV,EDR,IPS,SIEM etc
+
+|*format* (optional)
+|[stixtype]#{string_url}[string]#
+|An open vocab with known formats like syslog, json, text, LEEF, CEEF etc
+
+
+|===
+
+<<<
+
+===== 2.6.1.3. Anecdote Evidence Extension
+An Anecdote can be issued only by a person. Generally, when an Anecdote is issued, it is not known whether it is actually nefarious. As an example:
+
+- An Anecdote is established and then collected in an Observed-Data object
+- A Sighting is established where the SDO is of type Identity, and then connected to an Event
+
+Anecdotes are used to initiailise an incident. Conceivably, an Anecdote may also be issued that defines an Impact, rather than an Event
+Anecdotes are expected to have low confidence and result in the need to do tasks to increase the confidence. The Python class name is [stixliteral]#SightingAnecdote#.
+
+[width="100%",cols="37%,23%,40%",options="header",]
+|===
+^|[stixtr]*Property Name*
+^|[stixtr]*Type*
+^|[stixtr]*Description*
+
+|*person_name* (required)
+|[stixtype]#{string_url}[string]#
+|The name of the person who reported the anecdote
+
+|*person_context* (optional)
+|[stixtype]#{string_url}[string]#
+|(employee, 3rd party, injured, police, anonymous)
+
+|*report_submission* (optional)
+|[stixtype]#{string_url}[string]#
+|(mail, interview, transcript, telephone)
+
+
+|===
+
+<<<
+
+===== 2.6.1.4. Availability Impact Extension
+Context data is based on querying of internal systems and has 100% confidence
+It can be of two types:
+
+- Non-SCO: Historical or narrative data that would be contained in a Note, and is not an Event. The Note can attach to different objects, depending on the Inicdent type
+- SCO: For example a list of other user accounts that received the same email, queried from Exchange server, and is an Event. This example is shown to the right
+
+Non-SCO Context data is not an observation, nor a sighting, but it is Evidence. Different Context sources (e.g. SAP, SalesForce etc.) will probably have different provenance formats.  The Python class name is [stixliteral]#SightingContext#.
+
+
+[width="100%",cols="37%,23%,40%",options="header",]
+|===
+^|[stixtr]*Property Name*
+^|[stixtr]*Type*
+^|[stixtr]*Description*
+
+|*name* (required)
+|[stixtype]#{string_url}[string]#
+|The system the context came from; Outlook, SAP etc.
+
+|*description* (optional)
+|[stixtype]#{string_url}[string]#
+|A description of the context
+
+|*value* (optional)
+|[stixtype]#{string_url}[string]#
+|The value from the origin system
+
+|===
+
+<<<
+
+===== 2.6.1.5. Exclusion List Evidence Extension
+An Exclusion List is a source that provides a list of entities that have been shown by their processes (?) to be nefarious. Generally Exclusion lists are focused on specific approaches, such as phshing etc.
+
+There are often multiple sources covering the same approach, and it is to be expected that if an entity is found in multiple sources, then it has more confidence than if it is found in one out of many sources.
+
+A search on an Exclusion List can result in a sighting, but not an event, as it adds to the data available about.  The Python class name is [stixliteral]#SightingExclusion#.
+
+
+[width="100%",cols="37%,23%,40%",options="header",]
+|===
+^|[stixtr]*Property Name*
+^|[stixtr]*Type*
+^|[stixtr]*Description*
+
+|*source* (required)
+|[stixtype]#{string_url}[string]#
+|The name of the feed source
+
+|*channel* (optional)
+|[stixtype]#{string_url}[string]#
+|Channel on the source
+
+|===
+
+<<<
+
+===== 2.6.1.6. Enrichment Evidence Extension
+An Enrichment is an expansion in the evidence, by leveraging existing data and querying paid or free intel sources to return observables.
+Splunk lists common observables as BITCOIN ADDRESSES, CIDR BLOCK, CVE, EMAIL ADDRESS, IP, MALWARE, MD5, REGISTRY KEY, SHA1 and SHA256, SOFTWARE, URL and DOMAIN.
+
+A common OSINT system is Maltego.
+The results of an Enrichment will generally be an SCO, although SDO’s can also be returned.  Note observables may not be in the current SCO list.  The Python class name is [stixliteral]#SightingEnrichment#.
+
+[width="100%",cols="37%,23%,40%",options="header",]
+|===
+^|[stixtr]*Property Name*
+^|[stixtr]*Type*
+^|[stixtr]*Description*
+
+|*name* (required)
+|[stixtype]#{string_url}[string]#
+|The site the enrichment came from
+
+|*url* (optional)
+|[stixtype]#{string_url}[string]#
+|The url for the site
+
+|*paid* (optional)
+|[stixtype]#{boolean_url}[boolean]#
+|Paid is True, free is False
+
+|*value* (optional)
+|[stixtype]#{string_url}[string]#
+|The value from the origin system
+|===
+
+<<<
+
+===== 2.6.1.7. Hunt Evidence Extension
+A Hunt is a targeted search using a hunting platform, such as Kestrel, or similar, started as a Task.
+A Hunt can result in:
+
+1. Confirmation that an Alert has resulted in a negative Impact (e.g. user clicked on link, Outlook, which downloaded software and started a process) -> SCO’s & Impact
+2. Scope of Impact, which machines were impacted -> Impact
+3. An Alert, since an unknown threat has been discovered -> SCO
+
+A Hunt will result in an Event when an SCO is found, but can also result only in an Impact.  The Python class name is [stixliteral]#SightingHunt#.
+
+
+[width="100%",cols="37%,23%,40%",options="header",]
+|===
+^|[stixtr]*Property Name*
+^|[stixtr]*Type*
+^|[stixtr]*Description*
+
+|*name* (required)
+|[stixtype]#{string_url}[string]#
+|The name of the hunt system
+
+|*playbook_id* (optional)
+|[stixtype]#{string_url}[string]#
+|The id for for the playbook
+
+|*rule* (optional)
+|[stixtype]#{boolean_url}[boolean]#
+|The string of the rule
+
+|===
+
+<<<
+
+===== 2.6.1.8. Framework Evidence Extension
+Since SCO’s are ephemeral, the desire is to move up the Pyramid of Pain to more abstract characterisations, which are harder for attackers to evade.
+Frameworks, such as Mitre ATT&CK and DISARM are commonly used. As an example:
+
+- A suspicious email is found, and associated SCO’s and SRO’s are collected in Observed-Data object
+- Once phishing is confirmed, a Sighting is established with ATT&CK Technique T1566
+
+Assignment of a Framework Component requires a judgement, or a correlation from a knowledge base, and thereby has subjectivity.  The Python class name is [stixliteral]#SightingFramework#.
+
+
+[width="100%",cols="37%,23%,40%",options="header",]
+|===
+^|[stixtr]*Property Name*
+^|[stixtr]*Type*
+^|[stixtr]*Description*
+
+|*framework* (required)
+|[stixtype]#{string_url}[string]#
+|The name of the framework
+
+|*version* (optional)
+|[stixtype]#{string_url}[string]#
+|The version of the framework
+
+|*domain* (optional)
+|[stixtype]#{string_url}[string]#
+|The domain of the framework
+
+|*comparison* (optional)
+|[stixtype]#{string_url}[string]#
+|The method used to determine the match
+
+|*comparison_approach* (optional)
+|[stixtype]#{string_url}[string]#
+|Optional detail on how the comparison between observations and technique were made was made
+
+|===
+
+<<<
+
+===== 2.6.1.9. External Evidence Extension
+Threat Reports are posted by researchers on free and paid services, such as MISP. This is one method of confirming that an unknown Indicator is actually malicious. As an example:
+
+- A suspicious email is found, and the associated SCO’s and SRO’s are collected in an Observed-Data object
+- A Sighting is established where the Indicator has a type of “malicious-activity”, and connected to an Event
+
+However, reliability of a threat report is a concern, and confidence needs to be established for each individual provider in a channel such as MISP.  The Python class name is [stixliteral]#SightingExternal#.
+
+
+[width="100%",cols="37%,23%,40%",options="header",]
+|===
+^|[stixtr]*Property Name*
+^|[stixtr]*Type*
+^|[stixtr]*Description*
+
+|*source* (required)
+|[stixtype]#{string_url}[string]#
+|The source of the pattern
+
+|*version* (optional)
+|[stixtype]#{string_url}[string]#
+|The version of the report
+
+|*last_update* (optional)
+|[stixtype]#{timestamp_url}[timestamp]#
+|timestamp of the last version
+
+|*pattern* (optional)
+|[stixtype]#{string_url}[string]#
+|String from a vocabulary (stix, PCRE, sigma, snort, suricata, yara, attckflow)
+
+|*pattern_type* (optional)
+|[stixtype]#{string_url}[string]#
+|The type of pattern (stix, PCRE, sigma, snort, suricata, yara, attckflow)
+
+|*payload* (optional)
+|[stixtype]#{string_url}[string]#
+|if payload is simple or linked to external_reference
+
+|*valid_from* (optional)
+|[stixtype]#{timestamp_url}[timestamp]#
+|Timestamp describing validity
+
+|*valid_until* (optional)
+|[stixtype]#{timestamp_url}[timestamp]#
+|Timestamp describing validity
 
 |===
 
