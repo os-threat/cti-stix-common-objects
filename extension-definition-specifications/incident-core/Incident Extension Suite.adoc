@@ -1536,73 +1536,10 @@ _0 individuals_
 
 <<<
 
-[[event-entry]]
-=== 3.2. Event Entry Object Type
-
-*Type Name:* [stixtype]#event-entry#
-
-[width="100%",cols="37%,23%,40%",options="header",]
-|===
-^|[stixtr]*Property Name*
-^|[stixtr]*Type* 
-^|[stixtr]*Description*
-
-|*event_ref* (required)
-|[stixtype]#{identifier_url}[identifier]# 
-|The event that is described by this entry.
-This *MUST* reference [stixtype]#<<event,event>>#.
-
-|*next_steps* (optional)
-|[stixtype]#{list_url}[list]# of type [stixtype]#<<event-sequence-entry,event-sequence-entry>>#
-|A list of event sequences that describes the current event flows into the next one.
-
-|*sequence_start* (optional)
-|[stixtype]#{boolean_url}[boolean]#
-|If this is a start of a sequence chain.
-
-All sequences of events *MUST* begin with at least one entry where *sequence_start* is set to [stixliteral]#true#.
-If a cycle exists with multiple entries with *sequence_start* set to [stixliteral]#true# then all of these are equally valid start points.
-
-Default value is [stixliteral]#true#.
-
-|===
-
-[[event-sequence-entry]]
-=== 3.3. Event Sequence Object Type
-
-Event sequence entries store references to subsequent steps for an event entry.
-As these are always stored in an array of steps within an array of event entries validation rules for *event_ref* *MUST* be performed against the entire array of event entries.
-
-*Type Name:* [stixtype]#event-sequence-entry#
-
-[width="100%",cols="37%,23%,40%",options="header",]
-|===
-^|[stixtr]*Property Name*
-^|[stixtr]*Type* 
-^|[stixtr]*Description*
-
-|*event_ref* (required)
-|[stixtype]#{identifier_url}[identifier]# 
-|The identity of the event that is described by this entry.
-
-This reference *MUST* be included as an *event_ref* within the parent array of [stixtype]#<<event-entry,event-entry>># objects.
-
-|*condition_type* (required)
-|[stixtype]#<<activity-condition-enum,activity-condition-enum>>#
-|If the referenced step required the current one to be successful.
-If it is optional, or if it is unknown.
-
-|*transition_type* (required)
-|[stixtype]#<<activity-transition-enum,activity-transition-enum>>#
-|What state the referenced step depends on.
-If it is performed upon success, failure, simple completion, or if it is unknown.
-
-|===
-
 <<<
 
 [[incident-score]]
-=== 3.4. Incident Score Object Type
+=== 3.2. Incident Score Object Type
 
 *Type Name:* [stixtype]#incident-score#
 [width="100%",cols="37%,23%,40%",options="header",]
@@ -1627,7 +1564,7 @@ If it is performed upon success, failure, simple completion, or if it is unknown
 <<<
 
 [[state-change]]
-=== 3.5. State Change Object Type
+=== 3.3. State Change Object Type
 
 *Type Name:* [stixtype]#state-change#
 
@@ -1667,71 +1604,6 @@ If there is no initial state it typically means that this event caused or create
 For example, an event causing a network outage.
 
 If the *initial_ref* is populated this *MUST* reference the same type of SDO.
-
-|===
-
-<<<
-
-[[task-entry]]
-=== 3.6. Task Entry Object Type
-
-*Type Name:* [stixtype]#task-entry#
-
-[width="100%",cols="37%,23%,40%",options="header",]
-|===
-^|[stixtr]*Property Name*
-^|[stixtr]*Type* 
-^|[stixtr]*Description*
-
-|*task_ref* (required)
-|[stixtype]#{identifier_url}[identifier]# 
-|The identity of the task that is described by this entry.
-This *MUST* reference a [stixtype]#<<task,task>>#.
-
-|*next_steps* (optional)
-|[stixtype]#{list_url}[list]# of type [stixtype]#<<task-sequence-entry,task-sequence-entry>>#
-|A list of task sequences that describes the current task flows into the next one.
-
-|*sequence_start* (optional)
-|[stixtype]#{boolean_url}[boolean]#
-|If this is a start of a sequence chain.
-
-All sequences of tasks *MUST* begin with at least one entry where *sequence_start* is set to [stixliteral]#true#.
-If a cycle exists with multiple entries with *sequence_start* set to [stixliteral]#true# then all of these are equally valid start points.
-
-Default value is [stixliteral]#true#.
-
-|===
-
-[[task-sequence-entry]]
-=== 3.7. Task Sequence Object Type
-
-Task sequence entries store references to subsequent steps for a task entry.
-As these are always stored in an array of steps within an array of task entries validation rules for *task_ref* *MUST* be performed against the entire array of task entries.
-
-*Type Name:* [stixtype]#task-sequence-entry#
-
-[width="100%",cols="37%,23%,40%",options="header",]
-|===
-^|[stixtr]*Property Name*
-^|[stixtr]*Type* 
-^|[stixtr]*Description*
-
-|*condition_type* (required)
-|[stixtype]#<<activity-condition-enum,activity-condition-enum>>#
-|If the referenced step required the current one to be successful.
-If it is optional, or if it is unknown.
-
-|*task_ref* (required)
-|[stixtype]#{identifier_url}[identifier]# 
-|The identity of the event that is described by this entry.
-
-This reference *MUST* be included as an *task_ref* within the parent array of [stixtype]#<<task-entry,task-entry>># objects.
-
-|*transition_type* (required)
-|[stixtype]#<<activity-transition-enum,activity-transition-enum>>#
-|What state the referenced step depends on.
-If it is performed upon success, failure, simple completion, or if it is unknown.
 
 |===
 
@@ -2853,6 +2725,28 @@ Hours and minutes should be understood to establish the timezone for the activit
 |===
 
 <<<
+
+
+[[step-type-enum]]
+=== 5.12. Step Type Enumeration
+*Type Name:* [stixtype]#step-type-enum#
+
+[width="100%",cols="31%,69%",options="header",]
+|===
+^|[stixtr]*Vocabulary Value*
+^|[stixtr]*Description*
+|[stixliteral]#start_step#
+|Equivalent to CACAO start_step. It has no sequenced object connected to it
+
+|[stixliteral]#end_step#
+|Equivalent to CACAO end_step. It has no sequenced object connected to it
+
+|[stixliteral]#single_step#
+|Equivalent to CACAO single_step. It has a sequenced object connected to it
+
+|[stixliteral]#parallel_step#
+|Equivalent to CACAO parallel_step. It has no sequenced object connected to it
+|===
 
 == 6. Relationship Summary Table
 
