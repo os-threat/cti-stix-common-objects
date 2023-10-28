@@ -3074,9 +3074,9 @@ Their contributions are gratefully acknowledged:
 * Stephen Campbell, Cyber Threat Intelligence Network, Inc. (CTIN)
 * Trey Darley, CCB/CERT.be
 * Vasileios Mavroeidis, University of Oslo
-* Brett Forbes, OS-Threat, Pty Ltd
-* Denis O'Sullivan, OS-Threat, Pty Ltd
-* Paolo Di-Prodi, OS-Threat, Pty Ltd
+* Brett Forbes, OS-Threat
+* Denis O'Sullivan, OS-Threat
+* Paolo Di-Prodi, OS-Threat
 
 <<<
 
