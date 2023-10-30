@@ -1740,26 +1740,26 @@ This can be combined with other methods including [stixliteral]#automated-tool# 
 ^|[stixtr]*Vocabulary Value* 
 ^|[stixtr]*Description*
 
-|[stixliteral]#computers-mobile#
+|[stixliteral]#computers_mobile#
 |Mobile devices such as smartphones.
 
-|[stixliteral]#computers-personal#
+|[stixliteral]#computers_personal#
 |Workstations or laptops owned by an organization.
 
-|[stixliteral]#computers-server#
+|[stixliteral]#computers_server#
 |Servers owned by an organization.
 
 |[stixliteral]#customer#
 |An customer or client.
 This can be an individual or organization.
 
-|[stixliteral]#customer-individual#
+|[stixliteral]#customer_individual#
 |An customer or client that represents an individual.
 
-|[stixliteral]#customer-organization#
+|[stixliteral]#customer_organization#
 |An customer or client that represents a business or other organization.
 
-|[stixliteral]#domain-controller#
+|[stixliteral]#domain_controller#
 |A windows domain controller.
 
 |[stixliteral]#employee#
@@ -1768,35 +1768,35 @@ This can be an individual or organization.
 |[stixliteral]#group#
 |An informal collection of people, without formal governance, such as a distributed hacker group.
 
-|[stixliteral]#ics-actuator#
+|[stixliteral]#ics_actuator#
 |Actuator for industrial control systems.
 
-|[stixliteral]#ics-engineering-workstation#
+|[stixliteral]#ics_engineering-workstation#
 |Engineering workstation for industrial
 control systems.
 
-|[stixliteral]#ics-historian#
+|[stixliteral]#ics_historian#
 |Historian for industrial control systems.
 
-|[stixliteral]#ics-hmi#
+|[stixliteral]#ics_hmi#
 |Human machine interfaces for industrial control systems.
 
-|[stixliteral]#ics-other#
+|[stixliteral]#ics_other#
 |Other Industrial control systems.
 
-|[stixliteral]#ics-plc#
+|[stixliteral]#ics_plc#
 |Programmable logic controller for industrial control systems.
 
-|[stixliteral]#ics-safety-system#
+|[stixliteral]#ics_safety_system#
 |Safety system for industrial control systems.
 
-|[stixliteral]#ics-sensor#
+|[stixliteral]#ics_sensor#
 |Sensor for industrial control systems.
 
 |[stixliteral]#individual#
 |A single person.
 
-|[stixliteral]#network-device#
+|[stixliteral]#network_device#
 |Switches, routers, and wireless communication towers.
 
 |[stixliteral]#organization#
