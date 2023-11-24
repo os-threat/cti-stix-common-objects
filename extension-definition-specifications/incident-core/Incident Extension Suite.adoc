@@ -432,7 +432,7 @@ The Python class name is [stixliteral]#EventCoreExt#.
 
 |*extension_type* (required)
 |[stixtype]#{string_url}[string]#
-|The value of this property *MUST* be [stixliteral]#property-extension#
+|The value of this property *MUST* be [stixliteral]#mew-sdo#
 
 |===
 <<<
@@ -609,7 +609,7 @@ The definition extension  *MUST* use [stixliteral]#extension-definition--7cc33dd
 
 |*extension_type* (required)
 |[stixtype]#{string_url}[string]#
-|The value of this property *MUST* be [stixliteral]#property-extension#
+|The value of this property *MUST* be [stixliteral]#new-sdo#
 
 |===
 
@@ -1063,7 +1063,7 @@ The Python class name is [stixliteral]#TaskCoreExt#.
 
 |*extension_type* (required)
 |[stixtype]#{string_url}[string]#
-|The value of this property *MUST* be [stixliteral]#property-extension#
+|The value of this property *MUST* be [stixliteral]#new-sdo#
 
 |===
 
@@ -1162,7 +1162,7 @@ The definition extension  *MUST* use [stixliteral]#extension-definition--be0c7c7
 
 |*extension_type* (required)
 |[stixtype]#{string_url}[string]#
-|The value of this property *MUST* be [stixliteral]#property-extension#
+|The value of this property *MUST* be [stixliteral]#new-sdo#
 
 |===
 
@@ -3077,6 +3077,7 @@ Their contributions are gratefully acknowledged:
 * Brett Forbes, OS-Threat
 * Denis O'Sullivan, OS-Threat
 * Paolo Di-Prodi, OS-Threat
+* Max Barrass, OS-Threat
 
 <<<
 
