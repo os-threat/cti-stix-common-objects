@@ -87,7 +87,7 @@ Many sighting types create [stixtype]#<<event,events>>#, which  are flagged for 
 
 Incidents have [stixtype]#<<impact,impacts>># that change over time.
 [stixtype]#<<event,Events>># can cause or influence these [stixtype]#<<impact,impacts>># which are in turn mitigated and potentially resolved by [stixtype]#<<task,tasks>># performed as part of the incident response process.
-Both [stixtype]#<<event,events>># and [stixtype]#<<task,tasks>># can exist independent of [stixtype]#{incident_url}[incidents]# and in some workflows may occur prior to an incident being declared.
+Both [stixtype]#<<event,events>># and [stixtype]#<<task,tasks>># can exist independent of [stixtype]#{incident_url}[incidents]# and in some workflows may occur prior to an incident being declared as malicious.
 
 
 == 1. Incidents in STIX
