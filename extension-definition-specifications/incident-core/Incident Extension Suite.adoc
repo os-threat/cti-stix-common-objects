@@ -432,7 +432,7 @@ The Python class name is [stixliteral]#EventCoreExt#.
 
 |*extension_type* (required)
 |[stixtype]#{string_url}[string]#
-|The value of this property *MUST* be [stixliteral]#mew-sdo#
+|The value of this property *MUST* be [stixliteral]#new-sdo#
 
 |===
 <<<
