@@ -1277,7 +1277,7 @@ Anecdotes are expected to have low confidence and result in the need to do tasks
 
 <<<
 
-===== 2.6.1.4. Availability Impact Extension
+===== 2.6.1.4. Context Evidence Extension
 Context data is based on querying of internal systems and has 100% confidence
 It can be of two types:
 
