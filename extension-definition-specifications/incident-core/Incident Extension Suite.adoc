@@ -1123,26 +1123,26 @@ The Python class name is [stixliteral]#Sequence#.
 |[stixtype]#{string_url}[string]#
 |The type of sequence,  *MUST* be [stixliteral]#(event or task)#
 
-|*sequenced_object* (optional)
+|*sequenced_object_ref* (optional)
 |[stixtype]#{identifier_url}[identifier]#
 |The SDO that is part of the sequence, *MUST* be of type [stixtype]#event# or [stixtype]#task#.
 
-|*on_completion* (optional)
+|*on_completion_ref* (optional)
 |[stixtype]#{identifier_url}[identifier]#
 |The [stixtype]#sequence# object to follow, *MUST* be of type [stixtype]#sequence#
 
 
-|*on_success* (optional)
+|*on_success_ref* (optional)
 |[stixtype]#{identifier_url}[identifier]#
 |The [stixtype]#sequence# object to follow, *MUST* be of type [stixtype]#sequence#
 
 
-|*on_failure* (optional)
+|*on_failure_ref* (optional)
 |[stixtype]#{identifier_url}[identifier]#
 |The [stixtype]#sequence# object to follow, *MUST* be of type [stixtype]#sequence#
 
 
-|*next_steps* (optional)
+|*next_step_refs* (optional)
 |[stixtype]#{list_url}[list]# of type [stixtype]#{identifier_url}[identifier]#
 |The [stixtype]#sequence# objects to follow, *MUST* be of type [stixtype]#sequence#
 
